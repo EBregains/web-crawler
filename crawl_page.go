@@ -39,7 +39,6 @@ func crawlPage(rawBaseURL, rawCurrentURL string, pages map[string]int) {
 		return
 	}
 	fmt.Printf("Got HTML for: %s\n", rawCurrentURL)
-	fmt.Print(htmlBody)
 	nextUrls, err := getURLsFromHTML(htmlBody, rawBaseURL)
 	if err != nil {
 		fmt.Printf("Error - crawlPage: couldn't get URLs from HTML: %v\n", err)

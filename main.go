@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"time"
 )
 
 func main() {
@@ -18,17 +19,18 @@ func main() {
 	baseUrl := os.Args[1]
 	fmt.Printf("starting crawl of: %s", baseUrl)
 
-	// htmlBody, err := getHTML(baseUrl)
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
 	pages := make(map[string]int)
-	crawlPage(baseUrl, baseUrl, pages)
 
-	fmt.Println("Crawl complete")
+	// Timer for meassuring the time it takes to crawl the website
+	start := time.Now()
+	crawlPage(baseUrl, baseUrl, pages)
+	elapsed := time.Since(start)
+
+	fmt.Println("Results: ")
 	for url, count := range pages {
 		fmt.Printf("%s: %d\n", url, count)
 	}
+	fmt.Println("Crawl completed - Elapsed time: ", elapsed)
 
 	os.Exit(0)
 }
